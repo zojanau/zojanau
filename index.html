@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZoJanau - Profesionálna Preprava Zvierat</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primarny: #d4a574;
+            --sekundarny: #3d5a3d;
+            --akcent: #c75a3e;
+            --svetly: #f5ede0;
+            --tmavy: #1a1a1a;
+            --chyba: #e85d4a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #f5ede0 0%, #ede8e0 100%);
+            color: #2a2a2a;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* HEADER - ASYMETRICKÝ DIZAJN */
+        .hlavicka {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(61, 90, 61, 0.95);
+            padding: 1.2rem 2rem;
+            backdrop-filter: blur(10px);
+            border-bottom: 3px solid #d4a574;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo-grupa {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transform: skewX(-10deg);
+        }
+
+        .logo-ikona {
+            font-size: 2.5rem;
+            filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        .logo-text {
+            color: #d4a574;
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 3px;
+            font-style: italic;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #f5ede0;
+            text-decoration: none;
+            font-size: 0.95rem;
+            position: relative;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #d4a574;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* HERO - ASIMETRICKÝ DIZAJN */
+        .hrdina {
+            min-height: 100vh;
+            background: linear-gradient(45deg, #3d5a3d 0%, #1a1a1a 50%, #3d5a3d 100%);
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .hrdina::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(212, 165, 116, 0.1) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            border-radius: 50%;
+            animation: plutaj 20s infinite ease-in-out;
+        }
+
+        .hrdina::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(199, 90, 62, 0.05) 0%, transparent 70%);
+            bottom: -50px;
+            left: -100px;
+            border-radius: 50%;
+            animation: plutaj 25s infinite ease-in-out reverse;
+        }
+
+        .hrdina-obsah {
+            z-index: 10;
+            padding: 4rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .hrdina-text h1 {
+            font-size: 4rem;
+            color: #f5ede0;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+            font-weight: normal;
+            letter-spacing: -1px;
+        }
+
+        .hrdina-text h1 .akcent-slovo {
+            color: #d4a574;
+            font-style: italic;
+        }
+
+        .hrdina-podtext {
+            font-size: 1.2rem;
+            color: #e8d5c4;
+            max-width: 500px;
+            font-style: italic;
+            border-left: 4px solid #d4a574;
+            padding-left: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .tlacitka-heroja {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .tlacitko {
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Georgia', serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-weight: bold;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tlacitko-primarny {
+            background: #d4a574;
+            color: #1a1a1a;
+            border: 2px solid #d4a574;
+        }
+
+        .tlacitko-primarny::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #c75a3e;
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .tlacitko-primarny:hover {
+            color: #f5ede0;
+            left: 0;
+        }
+
+        .tlacitko-primarny:hover::before {
+            left: 0;
+        }
+
+        .tlacitko-sekundarny {
+            background: transparent;
+            color: #d4a574;
+            border: 2px solid #d4a574;
+        }
+
+        .tlacitko-sekundarny:hover {
+            background: #d4a574;
+            color: #1a1a1a;
+            transform: translateX(5px);
+        }
+
+        .hrdina-vizualna {
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 15rem;
+            position: relative;
+            animation: hoverEffect 3s infinite ease-in-out;
+        }
+
+        .hrdina-vizualna::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border: 3px solid rgba(212, 165, 116, 0.3);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(0deg);
+            animation: rotacia 20s linear infinite;
+        }
+
+        @keyframes hoverEffect {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes rotacia {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        @keyframes plutaj {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(30px, 30px); }
+        }
+
+        /* SEKCIA - DIAGONÁLNE ROZDELENIE */
+        .sekcia-uhlopieckova {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .uhlopieckovy-roh {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
+
+        .uhlopieckovy-vrchny {
+            top: 0;
+            left: 0;
+            border-width: 0 0 150px 100vw;
+            border-color: transparent transparent #f5ede0 transparent;
+        }
+
+        .uhlopieckovy-spodny {
+            bottom: 0;
+            right: 0;
+            border-width: 150px 0 0 100vw;
+            border-color: transparent transparent transparent #3d5a3d;
+        }
+
+        /* O NÁS - ASYMETRICKÁ MRIEŽKA */
+        .o-nas {
+            padding: 6rem 2rem;
+            background: #f5ede0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .o-nas-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .o-nas-nadpis {
+            font-size: 3.5rem;
+            margin-bottom: 4rem;
+            color: #3d5a3d;
+            position: relative;
+            display: inline-block;
+        }
+
+        .o-nas-nadpis::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #d4a574, #c75a3e);
+        }
+
+        .o-nas-mriežka {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            position: relative;
+        }
+
+        .o-nas-mriežka > :nth-child(1) { grid-column: 1; }
+        .o-nas-mriežka > :nth-child(2) { grid-column: 2; grid-row: 1 / 3; }
+        .o-nas-mriežka > :nth-child(3) { grid-column: 3; }
+        .o-nas-mriežka > :nth-child(4) { grid-column: 1 / 3; }
+        .o-nas-mriežka > :nth-child(5) { grid-column: 3; grid-row: 2 / 4; }
+        .o-nas-mriežka > :nth-child(6) { grid-column: 1 / 3; }
+
+        .o-nas-karta {
+            background: white;
+            padding: 2rem;
+            border-radius: 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 5px 5px 0px rgba(61, 90, 61, 0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #d4a574;
+        }
+
+        .o-nas-karta:hover {
+            transform: translate(-5px, -5px);
+            box-shadow: 10px 10px 0px rgba(61, 90, 61, 0.2);
+        }
+
+        .karta-ikona {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .karta-nadpis {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            color: #3d5a3d;
+        }
+
+        .karta-text {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* SLUŽBY - DIAGONÁLNE USPORIADANIE */
+        .sluzby {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #3d5a3d 0%, #1a1a1a 100%);
+            position: relative;
+            z-index: 3;
+        }
+
+        .sluzby-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .sluzby-nadpis {
+            font-size: 3.5rem;
+            margin-bottom: 4rem;
+            color: #d4a574;
+            text-align: right;
+            position: relative;
+        }
+
+        .sluzby-nadpis::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            right: 0;
+            width: 120px;
+            height: 4px;
+            background: linear-gradient(90deg, #c75a3e, #d4a574);
+        }
+
+        .sluzby-mriežka {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            position: relative;
+        }
+
+        .sluzba-karta {
+            background: rgba(245, 237, 224, 0.05);
+            border: 2px solid rgba(212, 165, 116, 0.3);
+            padding: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            transform: skewY(-2deg);
+        }
+
+        .sluzba-karta:nth-child(even) {
+            transform: skewY(2deg);
+        }
+
+        .sluzba-karta::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(212, 165, 116, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .sluzba-karta:hover::before {
+            left: 100%;
+        }
+
+        .sluzba-karta:hover {
+            border-color: #d4a574;
+            background: rgba(212, 165, 116, 0.1);
+            transform: translate(0, -10px);
+        }
+
+        .sluzba-ikona {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .sluzba-nazev {
+            font-size: 1.4rem;
+            color: #d4a574;
+            margin-bottom: 0.8rem;
+        }
+
+        .sluzba-popis {
+            color: #c0bfb8;
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .sluzba-cena {
+            font-size: 1.8rem;
+            color: #c75a3e;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sluzba-frecka {
+            font-size: 1.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .sluzba-karta:hover .sluzba-frecka {
+            transform: translateX(5px);
+        }
+
+        /* KONTAKT - ASYMETRICKÉ ROZDELENIE */
+        .kontakt {
+            padding: 6rem 2rem;
+            background: #f5ede0;
+            position: relative;
+            z-index: 4;
+        }
+
+        .kontakt-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .kontakt-informacia {
+            order: 2;
+        }
+
+        .kontakt-forma {
+            order: 1;
+            background: white;
+            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border-top: 5px solid #d4a574;
+        }
+
+        .kontakt-nadpis {
+            font-size: 2.5rem;
+            color: #3d5a3d;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .kontakt-info-prvok {
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(61, 90, 61, 0.1);
+        }
+
+        .kontakt-info-prvok:last-child {
+            border-bottom: none;
+        }
+
+        .kontakt-info-nazev {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #d4a574;
+            margin-bottom: 0.5rem;
+        }
+
+        .kontakt-info-hodnota {
+            font-size: 1.3rem;
+            color: #1a1a1a;
+            font-weight: bold;
+        }
+
+        .forma-skupiny {
+            margin-bottom: 1.5rem;
+        }
+
+        .forma-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #3d5a3d;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+        }
+
+        .forma-vstup {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            background: #f9f9f9;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .forma-vstup:focus {
+            outline: none;
+            background: white;
+            border-color: #d4a574;
+            box-shadow: 0 0 5px rgba(212, 165, 116, 0.3);
+        }
+
+        .forma-textova-oblast {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .forma-tlacitko {
+            width: 100%;
+            padding: 1rem;
+            background: #3d5a3d;
+            color: #f5ede0;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Georgia', serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .forma-tlacitko:hover {
+            background: #d4a574;
+            color: #1a1a1a;
+        }
+
+        .forma-sprava {
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0;
+            display: none;
+        }
+
+        .forma-sprava.zobraz {
+            display: block;
+        }
+
+        .sprava-uspech {
+            background: rgba(76, 175, 80, 0.2);
+            border-left: 4px solid #4CAF50;
+            color: #2d5016;
+        }
+
+        .sprava-chyba {
+            background: rgba(232, 93, 74, 0.2);
+            border-left: 4px solid #e85d4a;
+            color: #8b2a1a;
+        }
+
+        /* FOOTER - ASYMETRICKÝ DIZAJN */
+        .paticka {
+            background: #1a1a1a;
+            color: #c0bfb8;
+            padding: 3rem 2rem;
+            text-align: center;
+            border-top: 3px solid #d4a574;
+            position: relative;
+            z-index: 5;
+        }
+
+        .paticka-obsah {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .paticka-sekcia {
+            text-align: left;
+        }
+
+        .paticka-sekcia h3 {
+            color: #d4a574;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        .paticka-odkaz {
+            color: #c0bfb8;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .paticka-odkaz:hover {
+            color: #d4a574;
+        }
+
+        .paticka-spodok {
+            border-top: 1px solid rgba(212, 165, 116, 0.2);
+            padding-top: 2rem;
+        }
+
+        .paticka-spodok p {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* MODÁLNE OKNO */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            animation: modaliZjavenie 0.3s ease;
+        }
+
+        @keyframes modaliZjavenie {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-obsah {
+            background: #f5ede0;
+            margin: 5% auto;
+            padding: 2rem;
+            max-width: 700px;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 3px solid #d4a574;
+            position: relative;
+            animation: modalSklzavanie 0.3s ease;
+        }
+
+        @keyframes modalSklzavanie {
+            from {
+                transform: translateY(-100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-zatvaracka {
+            position: absolute;
+            right: 1.5rem;
+            top: 1.5rem;
+            font-size: 2rem;
+            color: #3d5a3d;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-zatvaracka:hover {
+            color: #c75a3e;
+            transform: rotate(90deg);
+        }
+
+        .modal-nadpis {
+            font-size: 2rem;
+            color: #3d5a3d;
+            margin-bottom: 1.5rem;
+            margin-top: 0.5rem;
+            border-bottom: 3px solid #d4a574;
+            padding-bottom: 1rem;
+        }
+
+        .modal-text {
+            color: #2a2a2a;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .modal-text h3 {
+            color: #3d5a3d;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        .modal-text p {
+            margin-bottom: 1rem;
+        }
+
+        .modal-text ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-text li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* RESPONZIVNOSŤ */
+        @media (max-width: 768px) {
+            .hrdina {
+                grid-template-columns: 1fr;
+                min-height: 80vh;
+            }
+
+            .hrdina-obsah {
+                padding: 2rem;
+                text-align: center;
+            }
+
+            .hrdina-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hrdina-vizualna {
+                display: none;
+            }
+
+            .hlavicka {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-menu {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+
+            .o-nas-mriežka > :nth-child(n) {
+                grid-column: 1 !important;
+                grid-row: auto !important;
+            }
+
+            .sluzby-mriežka {
+                grid-template-columns: 1fr;
+            }
+
+            .kontakt-container {
+                grid-template-columns: 1fr;
+            }
+
+            .kontakt-informacia {
+                order: 1;
+            }
+
+            .kontakt-forma {
+                order: 2;
+            }
+
+            .paticka-obsah {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-obsah {
+                margin: 20% auto;
+                max-width: 90%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 1.3rem;
+            }
+
+            .hrdina-text h1 {
+                font-size: 1.8rem;
+            }
+
+            .o-nas-nadpis {
+                font-size: 2rem;
+            }
+
+            .sluzby-nadpis {
+                font-size: 2rem;
+            }
+
+            .tlacitka-heroja {
+                flex-direction: column;
+            }
+
+            .tlacitko {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="hlavicka">
+        <div class="logo-grupa">
+            <span class="logo-ikona">🚐</span>
+            <div class="logo-text">ZoJanau</div>
+        </div>
+        <nav class="nav-menu">
+            <span class="nav-link" onclick="scrollNa('hero')">Úvodná</span>
+            <span class="nav-link" onclick="scrollNa('o-nas-sekcia')">O Nás</span>
+            <span class="nav-link" onclick="scrollNa('sluzby-sekcia')">Služby</span>
+            <span class="nav-link" onclick="scrollNa('kontakt-sekcia')">Kontakt</span>
+        </nav>
+    </header>
+
+    <!-- HERO SEKCIA -->
+    <section class="hrdina" id="hero">
+        <div class="hrdina-obsah">
+            <div class="hrdina-text">
+                <h1>Bezpečná Preprava<br><span class="akcent-slovo">Vašich Zvierat</span></h1>
+            </div>
+            <p class="hrdina-podtext">Profesionálna doprava domácich zvierat s maximálnou starostlivosťou a pohodlím. Viac ako 12 rokov skúseností na slovenskom trhu.</p>
+            <div class="tlacitka-heroja">
+                <button class="tlacitko tlacitko-primarny" onclick="scrollNa('sluzby-sekcia')">Objaviť Služby</button>
+                <button class="tlacitko tlacitko-sekundarny" onclick="scrollNa('kontakt-sekcia')">Kontaktovať Nás</button>
+            </div>
+        </div>
+        <div class="hrdina-vizualna">🐕</div>
+    </section>
+
+    <!-- O NÁS SEKCIA -->
+    <section class="o-nas" id="o-nas-sekcia">
+        <div class="uhlopieckovy-roh uhlopieckovy-vrchny"></div>
+        <div class="o-nas-container">
+            <h2 class="o-nas-nadpis">Prečo Zvoliť<br>ZoJanau?</h2>
+            <div class="o-nas-mriežka">
+                <div class="o-nas-karta">
+                    <div class="karta-ikona">🏆</div>
+                    <h3 class="karta-nadpis">12 Rokov Skúseností</h3>
+                    <p class="karta-text">Od roku 2014 dôverujú nám majitelia zvierat. Máme bohaté skúsenosti so všetkými druhmi domácich zvierat.</p>
+                </div>
+                <div class="o-nas-karta">
+                    <div class="karta-ikona">🚐</div>
+                    <h3 class="karta-nadpis">Moderný Vozový Park</h3>
+                    <p class="karta-text">Všetky naše vozidlá sú vybavené klimatizáciou, odvlhčovaním a zvukovou izoláciou pre maximalny komfort.</p>
+                </div>
+                <div class="o-nas-karta">
+                    <div class="karta-ikona">❤️</div>
+                    <h3 class="karta-nadpis">Maximálna Starostlivosť</h3>
+                    <p class="karta-text">Naši vodiči sú školení v starostlivosti o zvieratá. Každý transport je pre nás osobný záväzok.</p>
+                </div>
+                <div class="o-nas-karta">
+                    <div class="karta-ikona">🌍</div>
+                    <h3 class="karta-nadpis">Medzinárodná Doprava</h3>
+                    <p class="karta-text">Prepravujeme zvieratá po celej Európe s dodržaním všetkých medzinárodných predpisov a certifikácií.</p>
+                </div>
+                <div class="o-nas-karta">
+                    <div class="karta-ikona">📱</div>
+                    <h3 class="karta-nadpis">Sledovanie v Reálnom Čase</h3>
+                    <p class="karta-text">Aplikácia pre mobilný telefón umožňuje sledovať polohu vášho zvieraťa v reálnom čase počas celej cesty.</p>
+                </div>
+                <div class="o-nas-karta">
+                    <div class="karta-ikona">💳</div>
+                    <h3 class="karta-nadpis">Transparentné Ceny</h3>
+                    <p class="karta-text">Bez skrytých poplatkov. Všetko je jasne dohodnuté vopred. Prijímame hotovosť i kartové platby.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SLUŽBY SEKCIA -->
+    <section class="sluzby" id="sluzby-sekcia">
+        <div class="uhlopieckovy-roh uhlopieckovy-spodny"></div>
+        <div class="sluzby-container">
+            <h2 class="sluzby-nadpis">Naše Služby</h2>
+            <div class="sluzby-mriežka">
+                <div class="sluzba-karta">
+                    <div class="sluzba-ikona">🐕</div>
+                    <h3 class="sluzba-nazev">Domáce Zvieratá</h3>
+                    <p class="sluzba-popis">Preprava psov, mačiek a malých zvierat v bezpečných prepravných boxoch. Starostlivá manipulácia.</p>
+                    <div class="sluzba-cena">
+                        <span>Od 45€</span>
+                        <span class="sluzba-frecka">→</span>
+                    </div>
+                </div>
+                <div class="sluzba-karta">
+                    <div class="sluzba-ikona">✈️</div>
+                    <h3 class="sluzba-nazev">Letecký Transport</h3>
+                    <p class="sluzba-popis">Organizácia leteckej prepravy s všetkými potrebnými dokumentami a certifikátmi. Rýchlo a bezpečne.</p>
+                    <div class="sluzba-cena">
+                        <span>Od 180€</span>
+                        <span class="sluzba-frecka">→</span>
+                    </div>
+                </div>
+                <div class="sluzba-karta">
+                    <div class="sluzba-ikona">🗺️</div>
+                    <h3 class="sluzba-nazev">Dlhé Vzdialenosti</h3>
+                    <p class="sluzba-popis">Medzinárodná preprava medzi krajinami. Údržba teploty, regu­lárne prestávky pre zvieratá.</p>
+                    <div class="sluzba-cena">
+                        <span>Od 250€</span>
+                        <span class="sluzba-frecka">→</span>
+                    </div>
+                </div>
+                <div class="sluzba-karta">
+                    <div class="sluzba-ikona">🏥</div>
+                    <h3 class="sluzba-nazev">Zdravotná Asistencia</h3>
+                    <p class="sluzba-popis">Transport do veterinárov, nemocníc. Zvieri s zdravotnými problémami s bezbariérovou starostlivosťou.</p>
+                    <div class="sluzba-cena">
+                        <span>Od 60€</span>
+                        <span class="sluzba-frecka">→</span>
+                    </div>
+                </div>
+                <div class="sluzba-karta">
+                    <div class="sluzba-ikona">🏙️</div>
+                    <h3 class="sluzba-nazev">Mestná Preprava</h3>
+                    <p class="sluzba-popis">Rýchla preprava v rámci Bratislavy a okolia. Ideálna pre obchody a vrátenie sa domov.</p>
+                    <div class="sluzba-cena">
+                        <span>Od 35€</span>
+                        <span class="sluzba-frecka">→</span>
+                    </div>
+                </div>
+                <div class="sluzba-karta">
+                    <div class="sluzba-ikona">📋</div>
+                    <h3 class="sluzba-nazev">Dokumenty & Papiere</h3>
+                    <p class="sluzba-popis">Pomoc s prípravou všetkých potrebných dokladov pre export a import zvierat. Rady od skúsení tím.</p>
+                    <div class="sluzba-cena">
+                        <span>Od 30€</span>
+                        <span class="sluzba-frecka">→</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- KONTAKT SEKCIA -->
+    <section class="kontakt" id="kontakt-sekcia">
+        <div class="kontakt-container">
+            <div class="kontakt-forma">
+                <h2 class="kontakt-nadpis">Pošlite Nám Správu</h2>
+                <form id="kontaktnyFormular" onsubmit="odoslat(event)">
+                    <div class="forma-skupiny">
+                        <label class="forma-label">Vaše Meno</label>
+                        <input type="text" class="forma-vstup" name="meno" required>
+                    </div>
+                    <div class="forma-skupiny">
+                        <label class="forma-label">Váš Email</label>
+                        <input type="email" class="forma-vstup" name="email" required>
+                    </div>
+                    <div class="forma-skupiny">
+                        <label class="forma-label">Telefón</label>
+                        <input type="tel" class="forma-vstup" name="telefon" required>
+                    </div>
+                    <div class="forma-skupiny">
+                        <label class="forma-label">Typ Zvieraťa</label>
+                        <input type="text" class="forma-vstup" name="zviera" placeholder="Napr. pes, mačka..." required>
+                    </div>
+                    <div class="forma-skupiny">
+                        <label class="forma-label">Vaša Správa</label>
+                        <textarea class="forma-vstup forma-textova-oblast" name="sprava" required></textarea>
+                    </div>
+                    <button type="submit" class="forma-tlacitko">Odoslať Správu</button>
+                    <div id="formaSprava" class="forma-sprava"></div>
+                </form>
+            </div>
+            <div class="kontakt-informacia">
+                <h2 class="kontakt-nadpis">Kontaktné Údaje</h2>
+                
+                <div class="kontakt-info-prvok">
+                    <div class="kontakt-info-nazev">📞 Telefón</div>
+                    <div class="kontakt-info-hodnota">+421 917 428 561</div>
+                </div>
+                
+                <div class="kontakt-info-prvok">
+                    <div class="kontakt-info-nazev">📧 Email</div>
+                    <div class="kontakt-info-hodnota">info@zojanau.sk</div>
+                </div>
+                
+                <div class="kontakt-info-prvok">
+                    <div class="kontakt-info-nazev">🏢 Adresa</div>
+                    <div class="kontakt-info-hodnota">Vysokoškolákov 47<br>Bratislava, 811 08</div>
+                </div>
+                
+                <div class="kontakt-info-prvok">
+                    <div class="kontakt-info-nazev">🕐 Pracovná Doba</div>
+                    <div class="kontakt-info-hodnota">Po - Pia: 7:00 - 22:00<br>So - Ne: Na Požiadavku</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="paticka">
+        <div class="paticka-obsah">
+            <div class="paticka-sekcia">
+                <h3>O Spoločnosti</h3>
+                <p style="font-size: 0.9rem; line-height: 1.6;">ZoJanau je lídrom v oblasti prepravy zvierat na Slovensku. Naša visia je zaistiť maximálnu bezpečnosť a komfort pre vaše milované zvieratá.</p>
+            </div>
+            <div class="paticka-sekcia">
+                <h3>Rýchle Linky</h3>
+                <span class="paticka-odkaz" onclick="scrollNa('hero')">Úvodná Stránka</span>
+                <span class="paticka-odkaz" onclick="scrollNa('o-nas-sekcia')">O Nás</span>
+                <span class="paticka-odkaz" onclick="scrollNa('sluzby-sekcia')">Služby</span>
+                <span class="paticka-odkaz" onclick="scrollNa('kontakt-sekcia')">Kontakt</span>
+            </div>
+            <div class="paticka-sekcia">
+                <h3>Právne Dokumenty</h3>
+                <span class="paticka-odkaz" onclick="otvorModal('podminky-modal')">Podmínky Používania</span>
+                <span class="paticka-odkaz" onclick="otvorModal('politika-modal')">Politika Konfidenčnosti</span>
+            </div>
+        </div>
+        <div class="paticka-spodok">
+            <p>&copy; 2026 ZoJanau. Všetky práva vyhradené.</p>
+            <p>Bezpečná preprava zvierat je naša viera. 🐾</p>
+        </div>
+    </footer>
+
+    <!-- MODÁLNE OKNO - PODMÍNKY POUŽÍVANIA -->
+    <div id="podminky-modal" class="modal">
+        <div class="modal-obsah">
+            <span class="modal-zatvaracka" onclick="zatvorModal('podminky-modal')">&times;</span>
+            <h2 class="modal-nadpis">Podmínky Používania</h2>
+            <div class="modal-text">
+                <p>Tieto Podmínky používania (ďalej len "Podmínky") upravujú vzťah medzi spoločnosťou ZoJanau s.r.o. (ďalej len "Spoločnosť") a klientom (ďalej len "Užívateľ").</p>
+                
+                <h3>1. Všeobecné Ustanovenia</h3>
+                <p>Používaním služieb ZoJanau súhlasíte s týmito Podmienkami. Užívateľ sa zaväzuje používať naše služby iba na zákonné účely a v súlade so všetkými platným slovenským legislatívou.</p>
+                
+                <h3>2. Povinnosti Užívateľa</h3>
+                <ul>
+                    <li>Poskytnúť presné a kompletné informácie o prepravovanom zvierat</li>
+                    <li>Zaistiť, že zviera je v dobrom zdravotnom stave</li>
+                    <li>Mať všetky potrebné veterinárne osvedčenia a doklady</li>
+                    <li>Dodržať všetky pokyny nášho personálu</li>
+                    <li>Uhradiť dohodnuté poplatky v dohodnutom čase</li>
+                </ul>
+                
+                <h3>3. Zodpovednosť Spoločnosti</h3>
+                <p>Spoločnosť ZoJanau zodpovedá za starostlivosť a bezpečnosť prepravovaných zvierat počas doby prepravy. V prípade škody spôsobenej našou nedbanlivosťou, vyrovnáme danú škodu do výšky 5000 EUR. Spoločnosť nie je zodpovedná za škody spôsobené vyšším mocným.</p>
+                
+                <h3>4. Poistenie a Náhrady</h3>
+                <p>Všetky zvieratá sú automaticky poisťované počas prepravy. V prípade akýchkoľvek nešťastných udalostí sme pokrytí poistením. Ako Užívateľ si môžete obstáť na dodatočnom poistení za príplatok.</p>
+                
+                <h3>5. Zrušenie Rezervácie</h3>
+                <ul>
+                    <li>Zrušenie 7 dní pred prepravou: 100% refundácia</li>
+                    <li>Zrušenie 3-7 dní pred prepravou: 50% refundácia</li>
+                    <li>Zrušenie menej ako 3 dni: bez refundácie</li>
+                </ul>
+                
+                <h3>6. Práva Duševného Vlastníctva</h3>
+                <p>Všetok obsah na našej webovej stránke, vrátane textov, obrázkov a grafiky, je chránený autorským právom. Bez nášho písomného súhlasu nie je dovolené reprodukovať alebo distribuovať.</p>
+                
+                <h3>7. Zmeny Podmienok</h3>
+                <p>Spoločnosť si vyhraďuje právo zmeniť tieto Podmínky kedykoľvek. Všetky zmeny sú účinné okamžite po ich zverejnení na našej webovej stránke.</p>
+                
+                <h3>8. Kontakt</h3>
+                <p>V prípade akýchkoľvek otázok týkajúcich sa týchto Podmienok, kontaktujte nás na adrese: info@zojanau.sk alebo +421 917 428 561</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODÁLNE OKNO - POLITIKA KONFIDENČNOSTI -->
+    <div id="politika-modal" class="modal">
+        <div class="modal-obsah">
+            <span class="modal-zatvaracka" onclick="zatvorModal('politika-modal')">&times;</span>
+            <h2 class="modal-nadpis">Politika Konfidenčnosti</h2>
+            <div class="modal-text">
+                <p>Spoločnosť ZoJanau s.r.o. ("My", "Nás", "Naša") prevádzkuje webovú stránku www.zojanau.sk ("Web"). Táto stránka podrobne objasnuje naše zásady týkajúce sa zberu, používania a ochrany vašich osobných údajov.</p>
+                
+                <h3>1. Zbierané Informácie</h3>
+                <p>Počas používania našich služieb zbierame nasledujúce informácie:</p>
+                <ul>
+                    <li>Meno a kontaktné informácie (telefón, email, adresa)</li>
+                    <li>Informácie o vašom zvierat (druh, vek, zdravotný stav)</li>
+                    <li>Informácie o platbe (číslo karty je spracované bezpečne treťou stranou)</li>
+                    <li>Informácie o používaní webovej stránky (IP adresa, typ prehliadača)</li>
+                </ul>
+                
+                <h3>2. Ako Používame Vaše Údaje</h3>
+                <p>Vaše osobné údaje používame nasledujúcim spôsobom:</p>
+                <ul>
+                    <li>Na poskytovanie a zlepšovanie našich služieb</li>
+                    <li>Na komunikáciu s vami o vašej rezervácii a preprave</li>
+                    <li>Na odoslanie aktualizácií a noviniek (len s vaším súhlasom)</li>
+                    <li>Na analýzu a zlepšenie našej webovej stránky</li>
+                    <li>Na splnenie právnych povinností</li>
+                </ul>
+                
+                <h3>3. Bezpečnosť Údajov</h3>
+                <p>Všetky vaše osobné údaje sú chránené moderným šifrovaním SSL. Vaše údaje sú ukladané na bezpečných serveroch a prístup majú iba autorizovaní zamestnanci ZoJanau. Nikdy nepredávame ani nezdieľame vaše osobné údaje tretím stranám bez vášho súhlasu.</p>
+                
+                <h3>4. Cookies</h3>
+                <p>Naša webová stránka používa cookies na zlepšenie vášho zážitku. Cookies sú malé súbory, ktoré sa ukladajú vo vašom prehliadači. Akceptovaním používania webovej stránky súhlasíte s nášim používaním cookies.</p>
+                
+                <h3>5. Vaše Práva</h3>
+                <p>Máte právo:</p>
+                <ul>
+                    <li>Prístupu k svojim osobným údajom</li>
+                    <li>Opravenosti svojich údajov</li>
+                    <li>Vymazania svojich údajov</li>
+                    <li>Obmedzovania spracovávania vašich údajov</li>
+                    <li>Prenositeľnosti údajov</li>
+                </ul>
+                
+                <h3>6. Tretie Strany</h3>
+                <p>Naša webová stránka môže obsahovať linky na tretie strany. Nie sme zodpovední za ich politiku ochrany osobných údajov. Odporúčame vám prečítať si ich politiku pred tým, ako im poskytnete vaše osobné údaje.</p>
+                
+                <h3>7. Zmeny Politiky</h3>
+                <p>Túto politiku konfidenčnosti si vyhraďujeme zmeniť kedykoľvek. Všetky zmeny budú zverejnené na tejto stránke.</p>
+                
+                <h3>8. Kontakt</h3>
+                <p>Ak máte otázky týkajúce sa tejto Politiky konfidenčnosti, kontaktujte nás na:</p>
+                <p><strong>Email:</strong> privacy@zojanau.sk<br><strong>Telefón:</strong> +421 917 428 561</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function scrollNa(id) {
+            const element = document.getElementById(id);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function otvorModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function zatvorModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        function odoslat(event) {
+            event.preventDefault();
+            
+            const form = document.getElementById('kontaktnyFormular');
+            const meno = form.meno.value;
+            const email = form.email.value;
+            const telefon = form.telefon.value;
+            const zviera = form.zviera.value;
+            const sprava = form.sprava.value;
+            
+            // Validácia
+            if (!meno || !email || !telefon || !zviera || !sprava) {
+                zobrazSpravy('Prosím, vyplňte všetky polia!', 'chyba');
+                return;
+            }
+            
+            // Simulácia odoslania
+            setTimeout(() => {
+                zobrazSpravy('Ďakujeme! Vaša správa bola odoslaná. Odpovedáme zvyčajne do 24 hodín.', 'uspech');
+                form.reset();
+            }, 500);
+        }
+
+        function zobrazSpravy(text, typ) {
+            const spravyElement = document.getElementById('formaSprava');
+            spravyElement.textContent = text;
+            spravyElement.className = `forma-sprava zobraz sprava-${typ}`;
+            
+            setTimeout(() => {
+                spravyElement.classList.remove('zobraz');
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
